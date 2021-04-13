@@ -17,7 +17,7 @@
             <span class="navbar-toggler-icon"></span>
         </button>
 
-        <a class="navbar-brand" href="#">
+        <a class="navbar-brand" href="{{ path('homepage') }}">
             <img src="{{ asset('images/logo.png') }}" alt="" height="35">
         </a>
 
@@ -38,7 +38,7 @@
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         {# when not logged in #}
-                        <a class="dropdown-item" href="#">Logowanie</a>
+                        <a class="dropdown-item" href="{{ path('login') }}">Logowanie</a>
                         <a class="dropdown-item" href="#">Rejestracja</a>
                         {# when logged in #}
                         <a class="dropdown-item" href="#">Edycja danych</a> {# Ulubione #}
