@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20210525094943 extends AbstractMigration
+final class Version20210525101510 extends AbstractMigration
 {
     public function getDescription() : string
     {
@@ -20,13 +20,15 @@ final class Version20210525094943 extends AbstractMigration
     public function up(Schema $schema) : void
     {
         // this up() migration is auto-generated, please modify it to your needs
-        $this->addSql('ALTER TABLE book RENAME COLUMN pages TO page');
+        $this->addSql('ALTER TABLE book ADD isbn VARCHAR(13) DEFAULT NULL');
+        $this->addSql('ALTER TABLE book ADD published_at TIMESTAMP(0) WITHOUT TIME ZONE DEFAULT NULL');
     }
 
     public function down(Schema $schema) : void
     {
         // this down() migration is auto-generated, please modify it to your needs
         $this->addSql('CREATE SCHEMA public');
-        $this->addSql('ALTER TABLE book RENAME COLUMN page TO pages');
+        $this->addSql('ALTER TABLE book DROP isbn');
+        $this->addSql('ALTER TABLE book DROP published_at');
     }
 }
