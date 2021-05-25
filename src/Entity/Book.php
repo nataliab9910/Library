@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\BookRepository;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -25,9 +26,24 @@ class Book
     private $title;
 
     /**
+     * @ORM\Column(type="string", length=13, nullable=true)
+     */
+    private $ISBN;
+
+    /**
      * @ORM\Column(type="integer", nullable=true)
      */
-    private $page;
+    private $pages;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $publishedAt;
+
+    public function __construct()
+    {
+        $this->authors = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -46,6 +62,18 @@ class Book
         return $this;
     }
 
+    public function getISBN(): ?string
+    {
+        return $this->ISBN;
+    }
+
+    public function setISBN(?string $ISBN): self
+    {
+        $this->ISBN = $ISBN;
+
+        return $this;
+    }
+
     public function getPages(): ?int
     {
         return $this->pages;
@@ -54,6 +82,18 @@ class Book
     public function setPages(?int $pages): self
     {
         $this->pages = $pages;
+
+        return $this;
+    }
+
+    public function getPublishedAt(): ?\DateTimeInterface
+    {
+        return $this->publishedAt;
+    }
+
+    public function setPublishedAt(?\DateTimeInterface $publishedAt): self
+    {
+        $this->publishedAt = $publishedAt;
 
         return $this;
     }

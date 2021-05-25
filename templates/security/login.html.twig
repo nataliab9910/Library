@@ -1,0 +1,42 @@
+{% extends 'security/base-security.html.twig' %}
+
+{% block title %}Login{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+        {% block content %}
+            <h1>Logowanie</h1>
+
+            {% if error %}
+                <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+            {% endif %}
+
+            <form action="{{ path('login') }}" method="post">
+                <label class="form-lbl" for="username">E-mail</label>
+                <input class="input-bar" type="text" id="username" name="_username" value="{{ last_username }}"/>
+
+                <label class="form-lbl" for="password">Hasło</label>
+                <input class="input-bar" type="password" id="password" name="_password"/>
+
+                {#
+                If you want to control the URL the user
+                is redirected to on success (more details below)
+                <input type="hidden" name="_target_path" value="/account"/>
+                #}
+
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" value="remember-me"> Zapamiętaj mnie
+                    </label>
+                </div>
+
+                <button type="submit" class="btn btn-secondary submit-btn">Zaloguj</button>
+
+                <div class="text-small">
+                    Nie masz konta?
+                    <a href="{{ path('register') }}">Zarejestruj się!</a>
+                </div>
+            </form>
+        {% endblock %}
+

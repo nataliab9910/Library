@@ -2,9 +2,7 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {# Run `composer require symfony/webpack-encore-bundle`
-           and uncomment the following Encore helpers to start using Symfony UX #}
+        <title>{% block title %}iOwl Library!{% endblock %}</title>
         {% block stylesheets %}
             {{ encore_entry_link_tags('app') }}
         {% endblock %}
@@ -14,6 +12,61 @@
         {% endblock %}
     </head>
     <body>
-        {% block body %}ojoj{% endblock %}
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <a class="navbar-brand" href="{{ path('homepage') }}">
+            <img src="{{ asset('images/logo.png') }}" alt="" height="35">
+        </a>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Wyszukiwarka<span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Kategorie</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Filie</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Konto
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        {# when not logged in #}
+                        <a class="dropdown-item" href="{{ path('login') }}">Logowanie</a>
+                        <a class="dropdown-item" href="{{ path('register') }}">Rejestracja</a>
+                        {# when logged in #}
+                        <a class="dropdown-item" href="#">Edycja danych</a> {# Ulubione #}
+                        <a class="dropdown-item" href="#">Wypożyczenia</a>
+                        <a class="dropdown-item" href="#">Zamówienia</a>
+                        <a class="dropdown-item" href="#">Zwrócone</a>
+                        <a class="dropdown-item" href="#">Rozliczenia</a>
+                        <a class="dropdown-item" href="#">Ulubione</a> {# Filtry #}
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">Wyloguj</a>
+                    </div>
+                </li>
+{#                <li class="nav-item">#}
+{#                    <a class="nav-link disabled" href="#">Disabled</a>#}
+{#                </li>#}
+            </ul>
+            <form class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" type="search" placeholder="Znajdź książkę..." aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Szukaj</button>
+            </form>
+        </div>
+    </nav>
+        {% block body %}
+            <div class="container">
+                {% block content %}
+
+                {% endblock %}
+            </div>
+        {% endblock %}
     </body>
 </html>
