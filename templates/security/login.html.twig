@@ -1,54 +1,58 @@
-{% extends 'security/base-security.html.twig' %}
+{% extends 'base.html.twig' %}
 
 {% block title %}Logowanie{% endblock %}
 {% block stylesheets %}
     {{ parent() }}
+    {{ encore_entry_link_tags('security') }}
 {% endblock %}
 
-{% block content %}
-    <h1>Logowanie</h1>
-    <form method="post">
-        {% if error %}
-            <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-        {% endif %}
+{% block body %}
+    <div class="login-page-container">
+        <div class="login-container">
+            {% block content %}
 
-        {% if app.user %}
-            <div class="mb-3">
-                Jesteś zalogowany jako {{ app.user.username }}.<br>
-                Aby się wylogować kliknij <a href="{{ path('logout') }}">tutaj</a>.
-            </div>
-        {% endif %}
+                <h1>Logowanie</h1>
 
-{#        <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>#}
-        <label class="form-lbl" for="inputEmail">Email</label>
-        <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control input-bar"
-               autocomplete="email" required autofocus>
-        <label class="form-lbl" for="inputPassword">Password</label>
-        <input type="password" name="password" id="inputPassword" class="form-control input-bar" autocomplete="current-password"
-               required>
+                {% if error %}
+                    <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                {% endif %}
 
-        <input type="hidden" name="_csrf_token"
-               value="{{ csrf_token('authenticate') }}"
-        >
+                {% if app.user %}
+                    <h5>
+                        Jesteś zalogowany jako {{ app.user.username }}.<br>
+                        Aby się wylogować kliknij <a href="{{ path('logout') }}">tutaj</a>.
+                    </h5>
+                {% endif %}
 
-        {#
-        Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
-        See https://symfony.com/doc/current/security/remember_me.html
-        #}
+                <form method="post" {% if app.user %} class="disabled" {% endif %}>
+                    <label class="form-lbl" for="inputEmail">Email</label>
+                    <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control input-bar"
+                           autocomplete="email" required autofocus>
+                    <label class="form-lbl" for="inputPassword">Password</label>
+                    <input type="password" name="password" id="inputPassword" class="form-control input-bar" autocomplete="current-password"
+                           required>
 
-        <div class="checkbox mb-3">
-            <label>
-                <input type="checkbox" name="_remember_me"> Zapamiętaj mnie
-            </label>
+                    <input type="hidden" name="_csrf_token"
+                           value="{{ csrf_token('authenticate') }}"
+                    >
+
+                    <div class="checkbox mb-3">
+                        <label>
+                            <input type="checkbox" name="_remember_me"> Zapamiętaj mnie
+                        </label>
+                    </div>
+
+                    <button class="btn btn-secondary submit-btn" type="submit" {% if app.user %} disabled {% endif %}>
+                        Zaloguj
+                    </button>
+                </form>
+
+                <div class="text-small" {% if app.user %} hidden {% endif %}>
+                    Nie masz konta?
+                    <a href="{{ path('register') }}">Zarejestruj się!</a>
+                </div>
+
+            {% endblock %}
         </div>
-
-
-        <button class="btn btn-secondary submit-btn" type="submit" {% if app.user %} disabled {% endif %}>
-            Zaloguj
-        </button>
-    </form>
-    <div class="text-small" {% if app.user %} hidden {% endif %}>
-        Nie masz konta?
-        <a href="{{ path('register') }}">Zarejestruj się!</a>
     </div>
 {% endblock %}

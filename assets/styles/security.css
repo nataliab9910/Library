@@ -1,6 +1,12 @@
 body {
-    width: 100vw;
-    height: 100vh;
+    min-width: 100vw;
+    min-height: 100vh;
+    /*height: fit-content;*/
+    padding-bottom: 5%;
+}
+
+.disabled {
+    pointer-events: none;
 }
 
 .login-page-container {
