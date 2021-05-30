@@ -27,14 +27,6 @@ class SecurityController extends AbstractController
     }
 
     /**
-     * @Route("/register", name="register")
-     */
-    public function register(): Response
-    {
-        return $this->render('security/register.html.twig');
-    }
-
-    /**
      * @Route("/logout", name="logout")
      */
     public function logout()
