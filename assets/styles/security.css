@@ -1,8 +1,12 @@
+body {
+    width: 100vw;
+    height: 100vh;
+}
+
 .login-page-container {
     margin: 0;
     padding: 0;
-    width: 100%;
-    height: calc(100vh - 4rem);
+    height: 90%;
     display: grid;
     grid-template-columns: 10% 3fr 2fr 10%;
     grid-template-rows: 5% 1fr 10%;
@@ -23,7 +27,7 @@
 
     justify-content: center;
 
-    height: 80%;
+    height: fit-content;
     width: 80%;
 }
 
@@ -67,4 +71,27 @@
     width: 50%;
     margin: 1em 0 2em;
     align-self: center;
+}
+
+@media (max-device-width: 1200px) {
+    .login-page-container {
+        display: flex;
+        flex-direction: column;
+        margin: 10%;
+    }
+}
+
+@media (max-device-width: 800px) {
+    .login-page-container {
+        margin: 5% 0 0;
+    }
+
+    input[type="checkbox"] {
+        zoom: 2;
+    }
+
+    * {
+        font-size: 30px;
+    }
+
 }

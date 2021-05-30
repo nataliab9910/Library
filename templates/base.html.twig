@@ -37,10 +37,7 @@
                         Konto
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        {# when not logged in #}
-                        <a class="dropdown-item" href="{{ path('login') }}">Logowanie</a>
-                        <a class="dropdown-item" href="{{ path('register') }}">Rejestracja</a>
-                        {# when logged in #}
+                        {% if app.user %}
                         <a class="dropdown-item" href="#">Edycja danych</a> {# Ulubione #}
                         <a class="dropdown-item" href="#">Wypożyczenia</a>
                         <a class="dropdown-item" href="#">Zamówienia</a>
@@ -48,7 +45,11 @@
                         <a class="dropdown-item" href="#">Rozliczenia</a>
                         <a class="dropdown-item" href="#">Ulubione</a> {# Filtry #}
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Wyloguj</a>
+                        <a class="dropdown-item" href="{{ path('logout') }}">Wyloguj</a>
+                        {% else %}
+                        <a class="dropdown-item" href="{{ path('login') }}">Logowanie</a>
+                        <a class="dropdown-item" href="{{ path('register') }}">Rejestracja</a>
+                        {% endif %}
                     </div>
                 </li>
 {#                <li class="nav-item">#}

@@ -14,7 +14,8 @@
 
         {% if app.user %}
             <div class="mb-3">
-                You are logged in as {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a>
+                Jesteś zalogowany jako {{ app.user.username }}.<br>
+                Aby się wylogować kliknij <a href="{{ path('logout') }}">tutaj</a>.
             </div>
         {% endif %}
 
@@ -42,11 +43,11 @@
         </div>
 
 
-        <button class="btn btn-secondary submit-btn" type="submit">
+        <button class="btn btn-secondary submit-btn" type="submit" {% if app.user %} disabled {% endif %}>
             Zaloguj
         </button>
     </form>
-    <div class="text-small">
+    <div class="text-small" {% if app.user %} hidden {% endif %}>
         Nie masz konta?
         <a href="{{ path('register') }}">Zarejestruj się!</a>
     </div>
