@@ -6,20 +6,29 @@ use App\Entity\User;
 use App\Entity\UserDetails;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class UserFixture extends Fixture
 {
+    const USER_DATA = [["Anna", "Kowalska", "123456789", "31-300 Kraków ul. Warszawska 24"],
+        ["Jan", "Nowak", "987654321", "31-302 Kraków ul. Podgórska 2/135"],
+        ["Janina", "Nowak", "689689689", "31-302 Kraków ul. Podgórska 2/135"]];
+
+    private $passwordEncoder;
+
+    public function __construct(UserPasswordEncoderInterface $passwordEncoder)
+    {
+        $this->passwordEncoder = $passwordEncoder;
+    }
+
     public function load(ObjectManager $manager)
     {
-        $userDetails1 = $this->makeUserDetails("Anna", "Kowalska", "123456789", "31-300 Kraków ul. Warszawska 24");
-        $manager->persist($userDetails1);
-        $manager->persist($this->makeUser($userDetails1));
-        $userDetails2 = $this->makeUserDetails("Jan", "Nowak", "987654321", "31-302 Kraków ul. Podgórska 2/135");
-        $manager->persist($userDetails2);
-        $manager->persist($this->makeUser($userDetails2));
-        $userDetails3 = $this->makeUserDetails("Janina", "Nowak", "689689689", "31-302 Kraków ul. Podgórska 2/135");
-        $manager->persist($userDetails3);
-        $manager->persist($this->makeUser($userDetails3));
+        foreach (self::USER_DATA as $userData) {
+            $userDetails = $this->makeUserDetails(...$userData);
+            $user = $this->makeUser($userDetails);
+            $manager->persist($userDetails);
+            $manager->persist($user);
+        }
 
         $manager->flush();
     }
@@ -35,8 +44,13 @@ class UserFixture extends Fixture
 
     private function makeUser(UserDetails $userDetails) {
         $user = new User();
-        $user->setEmail($userDetails->getName().'@'.$userDetails->getSurname().'.com');
-        $user->setPassword($userDetails->getName().'1');
+        $email = $userDetails->getName().'@'.$userDetails->getSurname().'.com';
+        $password = $userDetails->getName().'1';
+        $user->setEmail($email);
+        $user->setPassword($this->passwordEncoder->encodePassword(
+            $user,
+            $password
+        ));
         $user->setUserDetails($userDetails);
         return $user;
     }
