@@ -26,12 +26,6 @@ class Rental
     private $reader;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Book::class)
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $book;
-
-    /**
      * @ORM\Column(type="datetime")
      */
     private $rentDate;
@@ -46,6 +40,12 @@ class Rental
      */
     private $returnDate;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=AffiliatesBooks::class)
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $book;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -59,18 +59,6 @@ class Rental
     public function setReader(?User $reader): self
     {
         $this->reader = $reader;
-
-        return $this;
-    }
-
-    public function getBook(): ?Book
-    {
-        return $this->book;
-    }
-
-    public function setBook(?Book $book): self
-    {
-        $this->book = $book;
 
         return $this;
     }
@@ -107,6 +95,18 @@ class Rental
     public function setReturnDate(?\DateTimeInterface $returnDate): self
     {
         $this->returnDate = $returnDate;
+
+        return $this;
+    }
+
+    public function getBook(): ?AffiliatesBooks
+    {
+        return $this->book;
+    }
+
+    public function setBook(?AffiliatesBooks $book): self
+    {
+        $this->book = $book;
 
         return $this;
     }
