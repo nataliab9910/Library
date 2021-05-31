@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -16,6 +18,11 @@ use Symfony\Component\Security\Core\User\UserInterface;
  */
 class User implements UserInterface
 {
+    const STATUS_ACTIVE = 'active';
+    const STATUS_WAITING_FOR_APPROVAL = 'waiting for approval';
+    const STATUS_BLOCKED = 'blocked';
+    const STTAUS_DISABLED = 'disabled';
+
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
@@ -44,6 +51,26 @@ class User implements UserInterface
      * @ORM\JoinColumn(nullable=false)
      */
     private $userDetails;
+
+    /**
+     * @ORM\OneToOne(targetEntity=Card::class, inversedBy="owner", cascade={"persist", "remove"})
+     */
+    private $card;
+
+    /**
+     * @ORM\Column(type="string", length=255, options={"default":"waiting for approval"})
+     */
+    private $status;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Rental::class, mappedBy="reader", orphanRemoval=true)
+     */
+    private $rentals;
+
+    public function __construct()
+    {
+        $this->rentals = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -134,6 +161,60 @@ class User implements UserInterface
     public function setUserDetails(UserDetails $userDetails): self
     {
         $this->userDetails = $userDetails;
+
+        return $this;
+    }
+
+    public function getCard(): ?Card
+    {
+        return $this->card;
+    }
+
+    public function setCard(?Card $card): self
+    {
+        $this->card = $card;
+
+        return $this;
+    }
+
+    public function getStatus(): ?string
+    {
+        return $this->status;
+    }
+
+    public function setStatus(string $status): self
+    {
+        $this->status = $status;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Rental[]
+     */
+    public function getRentals(): Collection
+    {
+        return $this->rentals;
+    }
+
+    public function addRental(Rental $rental): self
+    {
+        if (!$this->rentals->contains($rental)) {
+            $this->rentals[] = $rental;
+            $rental->setReader($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRental(Rental $rental): self
+    {
+        if ($this->rentals->removeElement($rental)) {
+            // set the owning side to null (unless already changed)
+            if ($rental->getReader() === $this) {
+                $rental->setReader(null);
+            }
+        }
 
         return $this;
     }

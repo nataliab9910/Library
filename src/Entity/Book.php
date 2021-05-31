@@ -5,6 +5,7 @@ namespace App\Entity;
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\BookRepository;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -40,9 +41,31 @@ class Book
      */
     private $publishedAt;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=Author::class, inversedBy="books")
+     */
+    private $authors;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Publisher::class, inversedBy="books")
+     */
+    private $publisher;
+
+    /**
+     * @ORM\OneToMany(targetEntity=AffiliatesBooks::class, mappedBy="book", orphanRemoval=true)
+     */
+    private $affiliates;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Genre::class, mappedBy="books")
+     */
+    private $genres;
+
     public function __construct()
     {
         $this->authors = new ArrayCollection();
+        $this->affiliates = new ArrayCollection();
+        $this->genres = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -94,6 +117,99 @@ class Book
     public function setPublishedAt(?\DateTimeInterface $publishedAt): self
     {
         $this->publishedAt = $publishedAt;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Author[]
+     */
+    public function getAuthors(): Collection
+    {
+        return $this->authors;
+    }
+
+    public function addAuthor(Author $author): self
+    {
+        if (!$this->authors->contains($author)) {
+            $this->authors[] = $author;
+        }
+
+        return $this;
+    }
+
+    public function removeAuthor(Author $author): self
+    {
+        $this->authors->removeElement($author);
+
+        return $this;
+    }
+
+    public function getPublisher(): ?Publisher
+    {
+        return $this->publisher;
+    }
+
+    public function setPublisher(?Publisher $publisher): self
+    {
+        $this->publisher = $publisher;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|AffiliatesBooks[]
+     */
+    public function getAffiliates(): Collection
+    {
+        return $this->affiliates;
+    }
+
+    public function addAffiliate(AffiliatesBooks $affiliate): self
+    {
+        if (!$this->affiliates->contains($affiliate)) {
+            $this->affiliates[] = $affiliate;
+            $affiliate->setBook($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAffiliate(AffiliatesBooks $affiliate): self
+    {
+        if ($this->affiliates->removeElement($affiliate)) {
+            // set the owning side to null (unless already changed)
+            if ($affiliate->getBook() === $this) {
+                $affiliate->setBook(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Genre[]
+     */
+    public function getGenres(): Collection
+    {
+        return $this->genres;
+    }
+
+    public function addGenre(Genre $genre): self
+    {
+        if (!$this->genres->contains($genre)) {
+            $this->genres[] = $genre;
+            $genre->addBook($this);
+        }
+
+        return $this;
+    }
+
+    public function removeGenre(Genre $genre): self
+    {
+        if ($this->genres->removeElement($genre)) {
+            $genre->removeBook($this);
+        }
 
         return $this;
     }
