@@ -1,20 +1,45 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello HomepageController!{% endblock %}
+{% block title %}Strona startowa{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('homepage') }}
+{% endblock %}
 
 {% block body %}
-{#<style>#}
-{#    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }#}
-{#    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }#}
-{#</style>#}
-
-{#<div class="example-wrapper">#}
-{#    <h1>Hello {{ controller_name }}! ✅</h1>#}
-
-{#    This friendly message is coming from:#}
-{#    <ul>#}
-{#        <li>Your controller at <code><a href="{{ 'D:/Programowanie/ZTPAI/iowl_library/src/Controller/HomepageController.php'|file_link(0) }}">src/Controller/HomepageController.php</a></code></li>#}
-{#        <li>Your template at <code><a href="{{ 'D:/Programowanie/ZTPAI/iowl_library/templates/homepage/login2.html.twig'|file_link(0) }}">templates/homepage/login2.html.twig</a></code></li>#}
-{#    </ul>#}
-{#</div>#}
+    <div class="content">
+    {% block content %}
+        <div class="content-bar">
+            <h1>Wyszukiwarka książek:</h1>
+            <div class="search-group">
+                <div class="form-outline">
+                    <input id="search-input" type="search" id="form1" class="form-control" placeholder="Wyszukaj książkę..." />
+                </div>
+                <button id="search-button" type="button" class="btn btn-primary">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+        </div>
+        <div class="content-bar">
+            <h1>Szczęśliwy traf <i class="fas fa-smile-wink"></i></h1>
+            <div class="books-bar">
+                <div class="book-horizontal">
+                    <img class="book-img" src="{{ asset('images/book1.jpg') }}" alt="">
+                    <h5><a href="#">O chłopcu, który był kotem</a></h5>
+                    <h6>Paul Gallier</h6>
+                </div>
+                <div class="book-horizontal">
+                    <img class="book-img" src="{{ asset('images/book2.jpg') }}" alt="">
+                    <h5><a href="#">Sygnał</a></h5>
+                    <h6>Maxime Chattam</h6>
+                </div>
+                <div class="book-horizontal">
+                    <img class="book-img" src="{{ asset('images/book3.jpg') }}" alt="">
+                    <h5><a href="#">Kalendarz i klepsydra</a></h5>
+                    <h6>Tadeusz Konwicki</h6>
+                </div>
+            </div>
+        </div>
+    {% endblock %}
+    </div>
 {% endblock %}

@@ -1,0 +1,42 @@
+{% extends 'profile/index.html.twig' %}
+
+{% block title %}Historia wypożyczeń{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('profile') }}
+{% endblock %}
+
+{% block content %}
+    <div class="tab-content" id="nav-tabContent">
+        <h2>Moja historia wypożyczeń</h2>
+        <div class="container-horizontal">
+            <div class="book-vertical">
+                <img class="book-img" src="{{ asset('images/book1.jpg') }}" alt="">
+                <div class="book-data">
+                    <h5><a href="#">O chłopcu, który był kotem</a></h5>
+                    <h6>Paul Gallier</h6>
+                    <h4>Data wypożyczenia: 12.10.2020</h4>
+                    <h4>Data zwrotu: 12.11.2020</h4>
+                </div>
+            </div>
+            <div class="book-vertical">
+                <img class="book-img" src="{{ asset('images/book2.jpg') }}" alt="">
+                <div class="book-data">
+                    <h5><a href="#">O chłopcu, który był kotem</a></h5>
+                    <h6>Paul Gallier</h6>
+                    <h4>Data wypożyczenia: 12.10.2020</h4>
+                    <h4>Data zwrotu: 12.11.2020</h4>
+                </div>
+            </div>
+            <div class="book-vertical">
+                <img class="book-img" src="{{ asset('images/book2.jpg') }}" alt="">
+                <div class="book-data">
+                    <h5><a href="#">O chłopcu, który był kotem</a></h5>
+                    <h6>Paul Gallier</h6>
+                    <h4>Data wypożyczenia: 12.10.2020</h4>
+                    <h4>Data zwrotu: 12.11.2020</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

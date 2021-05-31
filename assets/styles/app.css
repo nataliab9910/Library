@@ -4,4 +4,36 @@ body {
     background-color: white;
     background-image: url("../../public/images/bg_log.png");
     background-size: cover;
+    min-width: 100vw;
+    min-height: 100vh;
+}
+
+.content-bar {
+    width: 100%;
+    height: fit-content;
+
+    display: flex;
+    flex-direction: column;
+
+    background-color: rgba(248, 249, 250, 0.8);
+    align-items: center;
+
+    padding: 1em;
+    box-shadow: 5px 5px 5px black;
+}
+
+
+.book-horizontal {
+    height: fit-content;
+
+    margin: 1em 4em;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.book-img {
+    height: 15em;
+    margin: 1em;
 }

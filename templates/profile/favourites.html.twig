@@ -1,0 +1,13 @@
+{% extends 'profile/index.html.twig' %}
+
+{% block title %}Ulubione{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('profile') }}
+{% endblock %}
+
+{% block content %}
+    <div class="tab-content" id="nav-tabContent">
+        Ulubione
+    </div>
+{% endblock %}

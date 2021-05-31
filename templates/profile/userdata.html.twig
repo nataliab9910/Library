@@ -1,0 +1,43 @@
+{% extends 'profile/index.html.twig' %}
+
+{% block title %}Moje dane{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('profile') }}
+{% endblock %}
+
+{% block content %}
+    <div class="tab-content" id="nav-tabContent">
+        <h2>Moje dane</h2>
+        <div class="container-vertical">
+            <img class="user-img" src="{{ asset('images/user.jpg') }}" alt="">
+            <div class="personal-data">
+                <div class="data-line">
+                    <i class="fas fa-user"></i> Adam Nowak
+                </div>
+                <div class="data-line">
+                    <i class="fas fa-home"></i> ul. Krakowska 12 31-310 Kraków
+                </div>
+                <div class="data-line">
+                    <i class="fas fa-phone"></i> 689-689-689
+                </div>
+                <div class="data-line">
+                    <i class="fas fa-envelope"></i> adam@nowak.com
+                </div>
+                <div class="data-line">
+                    <i class="fas fa-shield-alt"></i> active
+                </div>
+                <div class="data-line">
+                    <button class="btn btn-secondary">Edytuj dane</button>
+                    <button class="btn btn-secondary">Edytuj zdjęcie</button>
+                </div>
+            </div>
+            <div class="barcode-tab">
+                <h3>Twój kod:</h3>
+                <img class="barcode"
+                     src="https://barcode.tec-it.com/barcode.ashx?data=123123123124&code=Code128&translate-esc=on">
+            </div>
+
+        </div>
+    </div>
+{% endblock %}
