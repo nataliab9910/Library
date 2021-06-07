@@ -7,7 +7,6 @@ use App\Repository\UserDetailsRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ApiResource()
  * @ORM\Entity(repositoryClass=UserDetailsRepository::class)
  */
 class UserDetails

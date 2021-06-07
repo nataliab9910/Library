@@ -6,39 +6,28 @@
 {% endblock %}
 
 {% block content %}
-    <div class="content-bar">
-        <h1>Wyniki wyszukiwania</h1>
-        <div class="container-horizontal">
+<div class="content-bar">
+    <h1>Wyniki wyszukiwania</h1>
+    <div class="container-horizontal">
+        {% for book in books %}
             <div class="book-vertical">
-                <img class="book-img" src="{{ asset('images/book2.jpg') }}" alt="">
+                <img class="book-img" src="{{ asset(book.photo) }}" alt="">
                 <div class="book-data">
-                    <h5><a href="#">O chłopcu, który był kotem</a></h5>
-                    <h6>Paul Gallier</h6>
-                    <h4>Wydawnictwo</h4>
-                    <h4>Dostępność</h4>
+                    <h5><a href="#">{{ book.title }}</a></h5>
+                    <h6> Autorzy:
+                        {% for author in book.authors %}
+                            {{ author.name }} {{ author.surname }},
+                        {% endfor %}
+                    </h6>
+                    <h6>Wydawnictwo: {{ book.publisher.name }}</h6>
+                    <h6>Gatunek:
+                        {% for genre in book.genres %}
+                            {{ genre.name }},
+                        {% endfor %}
+                    </h6>
                     <button class="btn btn-secondary">Zamów</button>
                 </div>
             </div>
-            <div class="book-vertical">
-                <img class="book-img" src="{{ asset('images/book2.jpg') }}" alt="">
-                <div class="book-data">
-                    <h5><a href="#">O chłopcu, który był kotem</a></h5>
-                    <h6>Paul Gallier</h6>
-                    <h4>Wydawnictwo</h4>
-                    <h4>Dostępność</h4>
-                    <button class="btn btn-secondary">Zamów</button>
-                </div>
-            </div>
-            <div class="book-vertical">
-                <img class="book-img" src="{{ asset('images/book2.jpg') }}" alt="">
-                <div class="book-data">
-                    <h5><a href="#">O chłopcu, który był kotem</a></h5>
-                    <h6>Paul Gallier</h6>
-                    <h4>Wydawnictwo</h4>
-                    <h4>Dostępność</h4>
-                    <button class="btn btn-secondary">Zamów</button>
-                </div>
-            </div>
-        </div>
+        {% endfor %}
     </div>
-{% endblock %}
+    {% endblock %}

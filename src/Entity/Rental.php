@@ -7,7 +7,10 @@ use App\Repository\RentalRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ApiResource()
+ * @ApiResource(
+ *     collectionOperations={"get", "post"},
+ *     itemOperations={"get", "put", "delete"}
+ * )
  * @ORM\Entity(repositoryClass=RentalRepository::class)
  */
 class Rental

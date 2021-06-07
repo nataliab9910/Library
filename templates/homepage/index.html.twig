@@ -10,15 +10,18 @@
     <div class="content">
         <div class="content-bar">
             <h1>Wyszukiwarka książek:</h1>
-            <div class="search-group">
+
+            <form class="search-group" action>
                 <div class="form-outline">
-                    <input id="search-input" type="search" id="form1" class="form-control"
-                           placeholder="Wyszukaj książkę..."/>
+                    <input type="text" class="form-control" name="search"
+                           placeholder="Wyszukaj książkę..." value="{{ app.request.query.get('search') }}"
+                    />
                 </div>
-                <button id="search-button" type="button" class="btn btn-primary">
+                <button id="search-button" type="submit" class="btn btn-primary" formaction="/search">
                     <i class="fas fa-search"></i>
                 </button>
-            </div>
+            </form>
+
         </div>
         {% block content %}
             <div class="content-bar">

@@ -7,7 +7,10 @@ use App\Repository\AffiliatesBooksRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ApiResource()
+ * @ApiResource(
+ *     collectionOperations={"get", "post"},
+ *     itemOperations={"get", "put"}
+ *     )
  * @ORM\Entity(repositoryClass=AffiliatesBooksRepository::class)
  */
 class AffiliatesBooks

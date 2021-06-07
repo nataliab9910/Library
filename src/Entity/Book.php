@@ -2,15 +2,21 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiFilter;
 use ApiPlatform\Core\Annotation\ApiResource;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 use App\Repository\BookRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ApiResource()
+ * @ApiResource(
+ *     collectionOperations={"get", "post"},
+ *     itemOperations={"get", "put"}
+ *     )
  * @ORM\Entity(repositoryClass=BookRepository::class)
+ * @ApiFilter(SearchFilter::class, properties={"title": "partial"})
  */
 class Book
 {
@@ -162,13 +168,13 @@ class Book
         return $this;
     }
 
-    /**
-     * @return Collection|AffiliatesBooks[]
-     */
-    public function getAffiliates(): Collection
-    {
-        return $this->affiliates;
-    }
+    ///**
+    // * @return Collection|AffiliatesBooks[]
+    // */
+    //public function getAffiliates(): Collection
+    //{
+    //    return $this->affiliates;
+    //}
 
     public function addAffiliate(AffiliatesBooks $affiliate): self
     {
