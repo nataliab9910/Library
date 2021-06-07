@@ -12,6 +12,8 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class UserDetails
 {
+    const DEFAULT_PHOTO = 'images/user.png';
+
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
@@ -38,6 +40,11 @@ class UserDetails
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $address;
+
+    /**
+     * @ORM\Column(type="string", length=255, options={"default":"images/user.png"})
+     */
+    private $photo;
 
     public function getId(): ?int
     {
@@ -88,6 +95,23 @@ class UserDetails
     public function setAddress(?string $address): self
     {
         $this->address = $address;
+
+        return $this;
+    }
+
+    public function getPhoto(): ?string
+    {
+        $photo = $this->photo;
+        if ($photo)
+        {
+            return $this->photo;
+        }
+        return self::DEFAULT_PHOTO;
+    }
+
+    public function setPhoto(string $photo): self
+    {
+        $this->photo = $photo;
 
         return $this;
     }

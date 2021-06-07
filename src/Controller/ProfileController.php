@@ -14,16 +14,6 @@ use Symfony\Component\Routing\Annotation\Route;
 class ProfileController extends AbstractController
 {
     /**
-     * @Route("/profile", name="profile")
-     */
-    public function index(): Response
-    {
-        return $this->render('profile/index.html.twig', [
-            'controller_name' => 'ProfileController',
-        ]);
-    }
-
-    /**
      * @Route("/profile/userdata", name="userdata")
      */
     public function userdata(): Response
@@ -38,9 +28,7 @@ class ProfileController extends AbstractController
      */
     public function rentals(): Response
     {
-        return $this->render('profile/rentals.html.twig', [
-            'controller_name' => 'ProfileController',
-        ]);
+        return $this->renderBookpage('rentals');
     }
 
     /**
@@ -48,9 +36,7 @@ class ProfileController extends AbstractController
      */
     public function orders(): Response
     {
-        return $this->render('profile/orders.html.twig', [
-            'controller_name' => 'ProfileController',
-        ]);
+        return $this->renderBookpage('orders');
     }
 
     /**
@@ -58,7 +44,11 @@ class ProfileController extends AbstractController
      */
     public function history(): Response
     {
-        return $this->render('profile/history.html.twig', [
+        return $this->renderBookpage('history');
+    }
+
+    private function renderBookpage($name) {
+        return $this->render('profile/'.$name.'.html.twig', [
             'controller_name' => 'ProfileController',
         ]);
     }

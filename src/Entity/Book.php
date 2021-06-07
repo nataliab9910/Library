@@ -61,6 +61,11 @@ class Book
      */
     private $genres;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $photo;
+
     public function __construct()
     {
         $this->authors = new ArrayCollection();
@@ -210,6 +215,18 @@ class Book
         if ($this->genres->removeElement($genre)) {
             $genre->removeBook($this);
         }
+
+        return $this;
+    }
+
+    public function getPhoto(): ?string
+    {
+        return $this->photo;
+    }
+
+    public function setPhoto(?string $photo): self
+    {
+        $this->photo = $photo;
 
         return $this;
     }
