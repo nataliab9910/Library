@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Entity\Rental;
+use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -10,9 +12,15 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * @IsGranted("ROLE_USER")
  */
-
 class ProfileController extends AbstractController
 {
+    private EntityManagerInterface $entityManager;
+
+    public function __construct(EntityManagerInterface $entityManager)
+    {
+        $this->entityManager = $entityManager;
+    }
+
     /**
      * @Route("/profile/userdata", name="userdata")
      */
@@ -28,7 +36,7 @@ class ProfileController extends AbstractController
      */
     public function rentals(): Response
     {
-        return $this->renderBookpage('rentals');
+        return $this->renderBookpage('rentals', [Rental::STATUS_RENTED]);
     }
 
     /**
@@ -36,7 +44,7 @@ class ProfileController extends AbstractController
      */
     public function orders(): Response
     {
-        return $this->renderBookpage('orders');
+        return $this->renderBookpage('orders', [Rental::STATUS_ORDERED,Rental::STATUS_WAITING]);
     }
 
     /**
@@ -44,12 +52,19 @@ class ProfileController extends AbstractController
      */
     public function history(): Response
     {
-        return $this->renderBookpage('history');
+        return $this->renderBookpage('history', [Rental::STATUS_RETURNED]);
     }
 
-    private function renderBookpage($name) {
-        return $this->render('profile/'.$name.'.html.twig', [
-            'controller_name' => 'ProfileController',
+    private function renderBookpage($name, $statuses)
+    {
+        $repository = $this->entityManager->getRepository(Rental::class);
+        $rentals = [];
+        foreach($statuses as $status) {
+            array_push($rentals, ...$repository->findBy(['status' => $status, 'reader' => $this->getUser()]));
+        }
+
+        return $this->render('profile/' . $name . '.html.twig', [
+            'rentals' => $rentals,
         ]);
     }
 }

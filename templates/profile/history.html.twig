@@ -10,33 +10,21 @@
     <div class="tab-content" id="nav-tabContent">
         <h2>Moja historia zwrotów</h2>
         <div class="container-horizontal">
-            <div class="book-vertical">
-                <img class="book-img" src="{{ asset('images/book1.jpg') }}" alt="">
-                <div class="book-data">
-                    <h5><a href="#">O chłopcu, który był kotem</a></h5>
-                    <h6>Paul Gallier</h6>
-                    <h4>Data wypożyczenia: 12.10.2020</h4>
-                    <h4>Data zwrotu: 12.11.2020</h4>
+            {% for rental in rentals %}
+                <div class="book-vertical">
+                    <img class="book-img" src="{{ asset(rental.book.book.photo) }}" alt="">
+                    <div class="book-data">
+                        <h5><a href="#">{{ rental.book.book.title }}</a></h5>
+                        <h6>
+                            {% for author in rental.book.book.authors %}
+                                {{ author.name }} {{ author.surname}},
+                            {% endfor %}
+                        </h6>
+                        <h4>Data wypożyczenia: {{ rental.rentDate.format('d.m.Y') }}</h4>
+                        <h4>Data zwrotu: {{ rental.returnDate.format('d.m.Y') }}</h4>
+                    </div>
                 </div>
-            </div>
-            <div class="book-vertical">
-                <img class="book-img" src="{{ asset('images/book2.jpg') }}" alt="">
-                <div class="book-data">
-                    <h5><a href="#">O chłopcu, który był kotem</a></h5>
-                    <h6>Paul Gallier</h6>
-                    <h4>Data wypożyczenia: 12.10.2020</h4>
-                    <h4>Data zwrotu: 12.11.2020</h4>
-                </div>
-            </div>
-            <div class="book-vertical">
-                <img class="book-img" src="{{ asset('images/book2.jpg') }}" alt="">
-                <div class="book-data">
-                    <h5><a href="#">O chłopcu, który był kotem</a></h5>
-                    <h6>Paul Gallier</h6>
-                    <h4>Data wypożyczenia: 12.10.2020</h4>
-                    <h4>Data zwrotu: 12.11.2020</h4>
-                </div>
-            </div>
+            {% endfor %}
         </div>
     </div>
 {% endblock %}

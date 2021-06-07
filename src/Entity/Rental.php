@@ -12,10 +12,10 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Rental
 {
-    const STATUS_ORDERED = 'ordered';
-    const STATUS_RENTED = 'rented';
-    const STATUS_RETURNED = 'returned';
-    const STATUS_EXPIRED = 'expired';
+    const STATUS_ORDERED = 'zamówiona';
+    const STATUS_WAITING = 'oczekuje na odbiór';
+    const STATUS_RENTED = 'wypożyczona';
+    const STATUS_RETURNED = 'zwrócona';
 
     /**
      * @ORM\Id

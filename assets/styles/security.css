@@ -96,13 +96,4 @@
     .login-page-container {
         margin: 5% 0 0;
     }
-
-    input[type="checkbox"] {
-        zoom: 2;
-    }
-
-    * {
-        font-size: 30px;
-    }
-
 }

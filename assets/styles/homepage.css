@@ -31,6 +31,7 @@
 }
 
 .fa-smile-wink {
+    font-size: 1em;
     color: rgb(40, 167, 69);
 }
 
@@ -41,4 +42,14 @@
 
 .container-horizontal {
     width: unset;
+}
+
+@media (max-device-width: 800px) {
+    .books-bar {
+        flex-direction: column;
+    }
+
+    .form-outline {
+        min-width: 80%;
+    }
 }
