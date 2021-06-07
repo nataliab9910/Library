@@ -25,7 +25,9 @@
                             {{ genre.name }},
                         {% endfor %}
                     </h6>
-                    <button class="btn btn-secondary">Zamów</button>
+                    <button class="btn btn-secondary"
+                            onclick="window.location.href='{{ path('order_book', {id: book.id}) }}'">Zamów
+                    </button>
                 </div>
             </div>
         {% endfor %}

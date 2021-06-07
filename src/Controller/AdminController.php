@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-use App\Repository\CardRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -21,7 +20,6 @@ class AdminController extends AbstractController
     public function index(): Response
     {
         return $this->render('admin/index.html.twig', [
-            'controller_name' => 'AdminController',
         ]);
     }
 
@@ -30,6 +28,7 @@ class AdminController extends AbstractController
      */
     public function users(Request $request, HttpClientInterface $client): Response
     {
+        //TODO
         if (!$barcode = $request->query->get('barcode'))
         {
             return $this->render('admin/users.html.twig', [
@@ -57,7 +56,6 @@ class AdminController extends AbstractController
     public function user(): Response
     {
         return $this->render('admin/users.html.twig', [
-            'controller_name' => 'AdminController',
         ]);
     }
 
@@ -67,7 +65,6 @@ class AdminController extends AbstractController
     public function books(): Response
     {
         return $this->render('admin/books.html.twig', [
-            'controller_name' => 'AdminController',
         ]);
     }
 
@@ -77,7 +74,6 @@ class AdminController extends AbstractController
     public function rentals(): Response
     {
         return $this->render('admin/rentals.html.twig', [
-            'controller_name' => 'AdminController',
         ]);
     }
 }

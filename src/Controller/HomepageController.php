@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-use App\Entity\Book;
 use App\Repository\BookRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -12,20 +11,12 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class HomepageController extends AbstractController
 {
-    private EntityManagerInterface $entityManager;
-
-    public function __construct(EntityManagerInterface $entityManager)
-    {
-        $this->entityManager = $entityManager;
-    }
-
     /**
      * @Route("/", name="homepage")
      */
     public function index(): Response
     {
         return $this->render('homepage/index.html.twig', [
-            'controller_name' => 'HomepageController',
         ]);
     }
 
@@ -34,6 +25,7 @@ class HomepageController extends AbstractController
      */
     public function search(BookRepository $repository, Request $request): Response
     {
+        // TODO: service
         $search = $request->query->get('search');
         $books = $repository->findAllWithSearch($search);
 

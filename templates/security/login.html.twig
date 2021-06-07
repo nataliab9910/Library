@@ -26,10 +26,12 @@
 
                 <form method="post" {% if app.user %} class="disabled" {% endif %}>
                     <label class="form-lbl" for="inputEmail">Email</label>
-                    <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control input-bar"
+                    <input type="email" value="{{ last_username }}" name="email" id="inputEmail"
+                           class="form-control input-bar"
                            autocomplete="email" required autofocus>
                     <label class="form-lbl" for="inputPassword">Password</label>
-                    <input type="password" name="password" id="inputPassword" class="form-control input-bar" autocomplete="current-password"
+                    <input type="password" name="password" id="inputPassword" class="form-control input-bar"
+                           autocomplete="current-password"
                            required>
 
                     <input type="hidden" name="_csrf_token"

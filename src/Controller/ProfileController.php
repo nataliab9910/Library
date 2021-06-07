@@ -55,6 +55,15 @@ class ProfileController extends AbstractController
         return $this->renderBookpage('history', [Rental::STATUS_RETURNED]);
     }
 
+    /**
+     * @Route("/order/{id}", name="order_book")
+     */
+    public function orderBook($id): Response
+    {
+
+        return $this->orders();
+    }
+
     private function renderBookpage($name, $statuses)
     {
         $repository = $this->entityManager->getRepository(Rental::class);

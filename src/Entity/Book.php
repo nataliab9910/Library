@@ -168,14 +168,6 @@ class Book
         return $this;
     }
 
-    ///**
-    // * @return Collection|AffiliatesBooks[]
-    // */
-    //public function getAffiliates(): Collection
-    //{
-    //    return $this->affiliates;
-    //}
-
     public function addAffiliate(AffiliatesBooks $affiliate): self
     {
         if (!$this->affiliates->contains($affiliate)) {

@@ -51,14 +51,6 @@ class Publisher
         return $this;
     }
 
-    ///**
-    // * @return Collection|Book[]
-    // */
-    //public function getBooks(): Collection
-    //{
-    //    return $this->books;
-    //}
-
     public function addBook(Book $book): self
     {
         if (!$this->books->contains($book)) {
