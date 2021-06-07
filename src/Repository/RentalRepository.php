@@ -19,10 +19,16 @@ class RentalRepository extends ServiceEntityRepository
         parent::__construct($registry, Rental::class);
     }
 
-    public function create(Rental $rental) {
+    public function create(Rental $rental)
+    {
         $this->getEntityManager()->persist($rental);
         $this->getEntityManager()->flush();
         return $rental;
     }
 
+    public function delete(Rental $rental)
+    {
+        $this->getEntityManager()->remove($rental);
+        $this->getEntityManager()->flush();
+    }
 }

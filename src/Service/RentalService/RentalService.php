@@ -16,7 +16,7 @@ class RentalService implements RentalServiceInterface
 
     public function __construct(
         RentalRepository $rentalRepository,
-    BookRepository $bookRepository
+        BookRepository $bookRepository
     )
     {
         $this->rentalRepository = $rentalRepository;
@@ -25,7 +25,7 @@ class RentalService implements RentalServiceInterface
 
     public function create($user, $bookId)
     {
-        $book = $this->bookRepository->findOneBy(['id'=>$bookId]);
+        $book = $this->bookRepository->findOneBy(['id' => $bookId]);
 
         $rental = new Rental();
         $rental->setBook($book);
@@ -34,5 +34,11 @@ class RentalService implements RentalServiceInterface
         $rental->setStatus(Rental::STATUS_ORDERED);
 
         return $this->rentalRepository->create($rental);
+    }
+
+    public function delete($id)
+    {
+        $rental = $this->rentalRepository->findOneBy(['id'=>$id]);
+        $this->rentalRepository->delete($rental);
     }
 }

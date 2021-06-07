@@ -57,12 +57,21 @@ class ProfileController extends AbstractController
     }
 
     /**
-     * @Route("/order/{id}", name="order_book")
+     * @Route("/order/crete/{id}", name="order_book")
      */
     public function orderBook($id, RentalServiceInterface $service): Response
     {
         $service->create($this->getUser(), $id);
-        return $this->orders();
+        return $this->redirectToRoute('orders');
+    }
+
+    /**
+     * @Route("/rental/delete/{id}", name="delete_rental")
+     */
+    public function deleteRental($id, RentalServiceInterface $service): Response
+    {
+        $service->delete($id);
+        return $this->redirectToRoute('orders');
     }
 
     private function renderBookpage($name, $statuses)

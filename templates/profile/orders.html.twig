@@ -17,12 +17,14 @@
                         <h5><a href="#">{{ rental.book.title }}</a></h5>
                         <h6>
                             {% for author in rental.book.authors %}
-                                {{ author.name }} {{ author.surname}},
+                                {{ author.name }} {{ author.surname }},
                             {% endfor %}
                         </h6>
                         <h4>Data zamówienia: {{ rental.orderDate.format('d.m.Y') }}</h4>
                         <h4>Status: {{ rental.status }}</h4>
-                        <button class="btn btn-secondary">Zrezygnuj</button>
+                        <button class="btn btn-secondary"
+                                onclick="window.location.href='{{ path('delete_rental', {id: rental.id}) }}'">Zrezygnuj
+                        </button>
                     </div>
                 </div>
             {% endfor %}
