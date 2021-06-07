@@ -7,7 +7,6 @@ namespace App\Service\RentalService;
 use App\Entity\Rental;
 use App\Repository\BookRepository;
 use App\Repository\RentalRepository;
-use App\Service\RentalService\RentalServiceInterface;
 
 class RentalService implements RentalServiceInterface
 {
@@ -40,5 +39,27 @@ class RentalService implements RentalServiceInterface
     {
         $rental = $this->rentalRepository->findOneBy(['id'=>$id]);
         $this->rentalRepository->delete($rental);
+    }
+
+    public function changeStatus($id)
+    {
+        $rental = $this->rentalRepository->findOneBy(['id' => $id]);
+
+        $status = $rental->getStatus();
+        switch ($status) {
+            case Rental::STATUS_RENTED:
+                $newStatus = Rental::STATUS_RETURNED;
+                break;
+            case Rental::STATUS_WAITING:
+                $newStatus = Rental::STATUS_RENTED;
+                break;
+            case Rental::STATUS_ORDERED:
+                $newStatus = Rental::STATUS_WAITING;
+                break;
+            default:
+                $newStatus = $status;
+        }
+        $rental->setStatus($newStatus);
+        return $this->rentalRepository->create($rental);
     }
 }

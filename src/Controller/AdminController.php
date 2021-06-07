@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Entity\Rental;
+use App\Repository\RentalRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -36,7 +38,7 @@ class AdminController extends AbstractController
             ]);
         }
 
-        $url = 'https://localhost:8000/api/cards?page=1&barcode='.$barcode;
+        $url = 'https://localhost:8000/api/cards?page=1&barcode=' . $barcode;
         //dd($request);
         $response = $client->request(
             'GET',
@@ -51,7 +53,7 @@ class AdminController extends AbstractController
     }
 
     /**
-     * @Route("/admin/pannel/user", name="admin_user")
+     * @Route("/admin/pannel/user", name="admin_users")
      */
     public function user(): Response
     {
@@ -71,9 +73,15 @@ class AdminController extends AbstractController
     /**
      * @Route("/admin/pannel/rentals", name="admin_rentals")
      */
-    public function rentals(): Response
+    public function rentalsStatus(RentalRepository $rentalRepository): Response
     {
+        $ordered = $rentalRepository->findBy(['status'=>Rental::STATUS_ORDERED]);
+        $waiting = $rentalRepository->findBy(['status'=>Rental::STATUS_WAITING]);
+        $rented = $rentalRepository->findBy(['status'=>Rental::STATUS_RENTED]);
         return $this->render('admin/rentals.html.twig', [
+            'ordered' => $ordered,
+            'waiting' => $waiting,
+            'rented' => $rented,
         ]);
     }
 }
