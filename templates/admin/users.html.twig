@@ -1,0 +1,23 @@
+{% extends 'admin/index.html.twig' %}
+
+{% block title %}Użytkownicy{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('profile') }}
+{% endblock %}
+
+{% block content %}
+    <div class="tab-content" id="nav-tabContent">
+        <h2>Użytkownicy</h2>
+        <form class="search-group" action>
+            <div class="form-outline">
+                <input type="text" class="form-control" name="barcode"
+                       value="{{ app.request.query.get('barcode') }}"
+                />
+            </div>
+            <button id="search-button" type="submit" class="btn btn-primary" formaction="/admin/pannel/users">
+                <i class="fas fa-search"></i>
+            </button>
+        </form>
+    </div>
+{% endblock %}
