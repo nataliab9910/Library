@@ -48,11 +48,7 @@ class Rental
      */
     private $returnDate;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=AffiliatesBooks::class)
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $book;
+
 
     /**
      * @ORM\Column(type="string", length=255, options={"default":"ordered"})
@@ -63,6 +59,12 @@ class Rental
      * @ORM\Column(type="datetime", nullable=true)
      */
     private $order_date;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Book::class)
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $book;
 
     public function getId(): ?int
     {
@@ -117,18 +119,6 @@ class Rental
         return $this;
     }
 
-    public function getBook(): ?AffiliatesBooks
-    {
-        return $this->book;
-    }
-
-    public function setBook(?AffiliatesBooks $book): self
-    {
-        $this->book = $book;
-
-        return $this;
-    }
-
     public function getStatus(): ?string
     {
         return $this->status;
@@ -149,6 +139,18 @@ class Rental
     public function setOrderDate(?\DateTimeInterface $order_date): self
     {
         $this->order_date = $order_date;
+
+        return $this;
+    }
+
+    public function getBook(): ?Book
+    {
+        return $this->book;
+    }
+
+    public function setBook(?Book $book): self
+    {
+        $this->book = $book;
 
         return $this;
     }

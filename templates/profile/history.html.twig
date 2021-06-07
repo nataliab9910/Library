@@ -12,11 +12,11 @@
         <div class="container-horizontal">
             {% for rental in rentals %}
                 <div class="book-vertical">
-                    <img class="book-img" src="{{ asset(rental.book.book.photo) }}" alt="">
+                    <img class="book-img" src="{{ asset(rental.book.photo) }}" alt="">
                     <div class="book-data">
-                        <h5><a href="#">{{ rental.book.book.title }}</a></h5>
+                        <h5><a href="#">{{ rental.book.title }}</a></h5>
                         <h6>
-                            {% for author in rental.book.book.authors %}
+                            {% for author in rental.book.authors %}
                                 {{ author.name }} {{ author.surname}},
                             {% endfor %}
                         </h6>
