@@ -12,6 +12,11 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Rental
 {
+    const STATUS_ORDERED = 'ordered';
+    const STATUS_RENTED = 'rented';
+    const STATUS_RETURNED = 'returned';
+    const STATUS_EXPIRED = 'expired';
+
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
@@ -26,12 +31,12 @@ class Rental
     private $reader;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="datetime", nullable=true)
      */
     private $rentDate;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="datetime", nullable=true)
      */
     private $expReturnDate;
 
@@ -45,6 +50,16 @@ class Rental
      * @ORM\JoinColumn(nullable=false)
      */
     private $book;
+
+    /**
+     * @ORM\Column(type="string", length=255, options={"default":"ordered"})
+     */
+    private $status;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $order_date;
 
     public function getId(): ?int
     {
@@ -107,6 +122,30 @@ class Rental
     public function setBook(?AffiliatesBooks $book): self
     {
         $this->book = $book;
+
+        return $this;
+    }
+
+    public function getStatus(): ?string
+    {
+        return $this->status;
+    }
+
+    public function setStatus(string $status): self
+    {
+        $this->status = $status;
+
+        return $this;
+    }
+
+    public function getOrderDate(): ?\DateTimeInterface
+    {
+        return $this->order_date;
+    }
+
+    public function setOrderDate(?\DateTimeInterface $order_date): self
+    {
+        $this->order_date = $order_date;
 
         return $this;
     }
