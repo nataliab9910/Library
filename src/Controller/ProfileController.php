@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Rental;
+use App\Service\RentalService\RentalServiceInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -58,9 +59,9 @@ class ProfileController extends AbstractController
     /**
      * @Route("/order/{id}", name="order_book")
      */
-    public function orderBook($id): Response
+    public function orderBook($id, RentalServiceInterface $service): Response
     {
-
+        $service->create($this->getUser(), $id);
         return $this->orders();
     }
 
