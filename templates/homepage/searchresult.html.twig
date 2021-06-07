@@ -1,22 +1,22 @@
-{% extends 'profile/index.html.twig' %}
+{% extends 'homepage/index.html.twig' %}
 
-{% block title %}Historia wypożyczeń{% endblock %}
+{% block title %}Wyniki wyszukiwania{% endblock %}
 {% block stylesheets %}
     {{ parent() }}
-    {{ encore_entry_link_tags('profile') }}
 {% endblock %}
 
 {% block content %}
-    <div class="tab-content" id="nav-tabContent">
-        <h2>Moja historia zwrotów</h2>
+    <div class="content-bar">
+        <h1>Wyniki wyszukiwania</h1>
         <div class="container-horizontal">
             <div class="book-vertical">
-                <img class="book-img" src="{{ asset('images/book1.jpg') }}" alt="">
+                <img class="book-img" src="{{ asset('images/book2.jpg') }}" alt="">
                 <div class="book-data">
                     <h5><a href="#">O chłopcu, który był kotem</a></h5>
                     <h6>Paul Gallier</h6>
-                    <h4>Data wypożyczenia: 12.10.2020</h4>
-                    <h4>Data zwrotu: 12.11.2020</h4>
+                    <h4>Wydawnictwo</h4>
+                    <h4>Dostępność</h4>
+                    <button class="btn btn-secondary">Zamów</button>
                 </div>
             </div>
             <div class="book-vertical">
@@ -24,8 +24,9 @@
                 <div class="book-data">
                     <h5><a href="#">O chłopcu, który był kotem</a></h5>
                     <h6>Paul Gallier</h6>
-                    <h4>Data wypożyczenia: 12.10.2020</h4>
-                    <h4>Data zwrotu: 12.11.2020</h4>
+                    <h4>Wydawnictwo</h4>
+                    <h4>Dostępność</h4>
+                    <button class="btn btn-secondary">Zamów</button>
                 </div>
             </div>
             <div class="book-vertical">
@@ -33,8 +34,9 @@
                 <div class="book-data">
                     <h5><a href="#">O chłopcu, który był kotem</a></h5>
                     <h6>Paul Gallier</h6>
-                    <h4>Data wypożyczenia: 12.10.2020</h4>
-                    <h4>Data zwrotu: 12.11.2020</h4>
+                    <h4>Wydawnictwo</h4>
+                    <h4>Dostępność</h4>
+                    <button class="btn btn-secondary">Zamów</button>
                 </div>
             </div>
         </div>

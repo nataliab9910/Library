@@ -39,3 +39,6 @@
     flex-direction: row;
 }
 
+.container-horizontal {
+    width: unset;
+}

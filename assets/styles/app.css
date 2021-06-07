@@ -33,6 +33,24 @@ body {
     align-items: center;
 }
 
+.book-vertical {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin: 0 2em;
+}
+
+.container-horizontal {
+    width: 100%;
+    height: fit-content;
+    justify-content: space-evenly;
+
+    padding: 1em 1em 2em;
+
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}
+
 .book-img {
     height: 15em;
     margin: 1em;

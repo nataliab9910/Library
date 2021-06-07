@@ -31,17 +31,15 @@
                     <a class="nav-link" target="_blank" rel="noopener noreferrer" href="https://www.biblioteka.krakow.pl/filie-biblioteki-krakow-godziny-epidemia/">Filie</a>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <a class="nav-link dropdown-toggle" href="{{ path('userdata') }}" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Konto
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         {% if app.user %}
-                        <a class="dropdown-item" href="#">Edycja danych</a> {# Ulubione #}
-                        <a class="dropdown-item" href="#">Wypożyczenia</a>
-                        <a class="dropdown-item" href="#">Zamówienia</a>
-                        <a class="dropdown-item" href="#">Zwrócone</a>
-                        <a class="dropdown-item" href="#">Rozliczenia</a>
-                        <a class="dropdown-item" href="#">Ulubione</a> {# Filtry #}
+                        <a class="dropdown-item" href="{{ path('userdata') }}">Moje dane</a> {# Ulubione #}
+                        <a class="dropdown-item" href="{{ path('rentals') }}">Wypożyczenia</a>
+                        <a class="dropdown-item" href="{{ path('orders') }}">Zamówienia</a>
+                        <a class="dropdown-item" href="{{ path('history') }}">Historia zwrotów</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="{{ path('logout') }}">Wyloguj</a>
                         {% else %}

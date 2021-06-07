@@ -26,16 +26,6 @@ button.active {
     padding: 1em 1em 2em;
 }
 
-.container-horizontal {
-    width: 100%;
-    height: fit-content;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-
-    padding: 1em 1em 2em;
-}
-
 .user-img {
     height: 15em;
 
@@ -69,13 +59,4 @@ button.active {
     border: 1px solid black;
 }
 
-.container-horizontal {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-}
 
-.book-vertical {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-}

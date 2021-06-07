@@ -8,38 +8,39 @@
 
 {% block body %}
     <div class="content">
-    {% block content %}
         <div class="content-bar">
             <h1>Wyszukiwarka książek:</h1>
             <div class="search-group">
                 <div class="form-outline">
-                    <input id="search-input" type="search" id="form1" class="form-control" placeholder="Wyszukaj książkę..." />
+                    <input id="search-input" type="search" id="form1" class="form-control"
+                           placeholder="Wyszukaj książkę..."/>
                 </div>
                 <button id="search-button" type="button" class="btn btn-primary">
                     <i class="fas fa-search"></i>
                 </button>
             </div>
         </div>
-        <div class="content-bar">
-            <h1>Szczęśliwy traf <i class="fas fa-smile-wink"></i></h1>
-            <div class="books-bar">
-                <div class="book-horizontal">
-                    <img class="book-img" src="{{ asset('images/book1.jpg') }}" alt="">
-                    <h5><a href="#">O chłopcu, który był kotem</a></h5>
-                    <h6>Paul Gallier</h6>
-                </div>
-                <div class="book-horizontal">
-                    <img class="book-img" src="{{ asset('images/book2.jpg') }}" alt="">
-                    <h5><a href="#">Sygnał</a></h5>
-                    <h6>Maxime Chattam</h6>
-                </div>
-                <div class="book-horizontal">
-                    <img class="book-img" src="{{ asset('images/book3.jpg') }}" alt="">
-                    <h5><a href="#">Kalendarz i klepsydra</a></h5>
-                    <h6>Tadeusz Konwicki</h6>
+        {% block content %}
+            <div class="content-bar">
+                <h1>Szczęśliwy traf <i class="fas fa-smile-wink"></i></h1>
+                <div class="books-bar">
+                    <div class="book-horizontal">
+                        <img class="book-img" src="{{ asset('images/book1.jpg') }}" alt="">
+                        <h5><a href="#">O chłopcu, który był kotem</a></h5>
+                        <h6>Paul Gallier</h6>
+                    </div>
+                    <div class="book-horizontal">
+                        <img class="book-img" src="{{ asset('images/book2.jpg') }}" alt="">
+                        <h5><a href="#">Sygnał</a></h5>
+                        <h6>Maxime Chattam</h6>
+                    </div>
+                    <div class="book-horizontal">
+                        <img class="book-img" src="{{ asset('images/book3.jpg') }}" alt="">
+                        <h5><a href="#">Kalendarz i klepsydra</a></h5>
+                        <h6>Tadeusz Konwicki</h6>
+                    </div>
                 </div>
             </div>
-        </div>
-    {% endblock %}
+        {% endblock %}
     </div>
 {% endblock %}

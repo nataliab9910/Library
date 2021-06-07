@@ -54,16 +54,6 @@ class ProfileController extends AbstractController
     }
 
     /**
-     * @Route("/profile/favourites", name="favourites")
-     */
-    public function favourites(): Response
-    {
-        return $this->render('profile/favourites.html.twig', [
-            'controller_name' => 'ProfileController',
-        ]);
-    }
-
-    /**
      * @Route("/profile/history", name="history")
      */
     public function history(): Response

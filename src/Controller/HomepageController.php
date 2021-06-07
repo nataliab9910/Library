@@ -17,4 +17,14 @@ class HomepageController extends AbstractController
             'controller_name' => 'HomepageController',
         ]);
     }
+
+    /**
+     * @Route("/search", name="search")
+     */
+    public function search(): Response
+    {
+        return $this->render('homepage/searchresult.html.twig', [
+            'controller_name' => 'HomepageController',
+        ]);
+    }
 }

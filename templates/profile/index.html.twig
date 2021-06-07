@@ -30,12 +30,6 @@
                         onclick="location.href='{{ path('history') }}'"
                         type="button" role="tab" aria-controls="nav-contact" aria-selected="false">Historia zwrotów
                 </button>
-                <button class="nav-link  {{ app.request.get('_route') == 'favourites' ? 'active' }}"
-                        id="nav-contact-tab"
-                        data-bs-toggle="tab" data-bs-target="#nav-contact"
-                        onclick="location.href='{{ path('favourites') }}'"
-                        type="button" role="tab" aria-controls="nav-contact" aria-selected="false">Ulubione
-                </button>
             </div>
         </nav>
         <div class="content-bar">
