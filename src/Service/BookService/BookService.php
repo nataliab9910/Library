@@ -30,6 +30,31 @@ class BookService implements BookServiceInterface
 
     public function delete($id)
     {
-        // TODO: Implement delete() method.
+        $book = $this->get($id);
+        $this->bookRepository->delete($book);
+    }
+
+    public function get($id)
+    {
+        $book = $this->bookRepository->findOneBy(['id' => $id]);
+        return $book;
+    }
+
+    public function update($id, $title, $pages, $isbn)
+    {
+        $book = $this->get($id);
+        if ($title)
+        {
+            $book->setTitle($title);
+        }
+        if ($pages)
+        {
+            $book->setPages($pages);
+        }
+        if ($isbn)
+        {
+            $book->setIsbn($isbn);
+        }
+        return $this->bookRepository->create($book);
     }
 }
