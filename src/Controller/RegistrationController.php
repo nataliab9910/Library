@@ -25,7 +25,8 @@ class RegistrationController extends AbstractController
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid())
+        {
             $userDetails->setName($request->get('name'));
             $userDetails->setSurname($request->get('surname'));
             $user->setUserDetails($userDetails);
@@ -36,6 +37,7 @@ class RegistrationController extends AbstractController
                     $form->get('password')->getData()
                 )
             );
+            $user->setStatus(User::STATUS_WAITING_FOR_APPROVAL);
 
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($userDetails);

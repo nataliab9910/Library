@@ -19,7 +19,7 @@
                             {{ author.name }} {{ author.surname }},
                         {% endfor %}
                     </h6>
-                    <h6>Wydawnictwo: {{ book.publisher.name }}</h6>
+                    <h6>Wydawnictwo: {% if book.publisher %}{{ book.publisher.name }}{% endif %}</h6>
                     <h6>Gatunek:
                         {% for genre in book.genres %}
                             {{ genre.name }},
@@ -32,4 +32,5 @@
             </div>
         {% endfor %}
     </div>
-    {% endblock %}
+</div>
+{% endblock %}

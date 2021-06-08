@@ -37,7 +37,9 @@ class ProfileController extends AbstractController
      */
     public function rentals(): Response
     {
-        return $this->renderBookpage('rentals', [Rental::STATUS_RENTED]);
+        return $this->renderBookpage('rentals', [
+            Rental::STATUS_RENTED
+        ]);
     }
 
     /**
@@ -45,7 +47,9 @@ class ProfileController extends AbstractController
      */
     public function orders(): Response
     {
-        return $this->renderBookpage('orders', [Rental::STATUS_ORDERED,Rental::STATUS_WAITING]);
+        return $this->renderBookpage('orders', [
+            Rental::STATUS_ORDERED, Rental::STATUS_WAITING
+        ]);
     }
 
     /**
@@ -53,7 +57,9 @@ class ProfileController extends AbstractController
      */
     public function history(): Response
     {
-        return $this->renderBookpage('history', [Rental::STATUS_RETURNED]);
+        return $this->renderBookpage('history', [
+            Rental::STATUS_RETURNED
+        ]);
     }
 
     /**
@@ -61,7 +67,8 @@ class ProfileController extends AbstractController
      */
     public function orderBook($id, RentalServiceInterface $service): Response
     {
-        if (in_array($this->getUser()->getStatus(), [User::STATUS_BLOCKED, User::STTAUS_DISABLED])){
+        if (in_array($this->getUser()->getStatus(), [User::STATUS_BLOCKED, User::STTAUS_DISABLED]))
+        {
             return $this->redirectToRoute('userdata');
         }
         $service->create($this->getUser(), $id);
@@ -81,7 +88,8 @@ class ProfileController extends AbstractController
     {
         $repository = $this->entityManager->getRepository(Rental::class);
         $rentals = [];
-        foreach($statuses as $status) {
+        foreach ($statuses as $status)
+        {
             array_push($rentals, ...$repository->findBy(['status' => $status, 'reader' => $this->getUser()]));
         }
 

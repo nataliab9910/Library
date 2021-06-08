@@ -41,7 +41,7 @@ class UserDetails
     private $address;
 
     /**
-     * @ORM\Column(type="string", length=255, options={"default":"images/user.png"})
+     * @ORM\Column(type="string", length=255, options={"default":"images/user.png"}, nullable=true)
      */
     private $photo;
 

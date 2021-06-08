@@ -19,10 +19,11 @@ class RentalController extends AbstractController
      */
     public function changeStatus(RentalServiceInterface $service, $id)
     {
+        // TODO: connect to front
         $rental = $service->changeStatus($id);
 
         return $this->json([
-            'rental'=>$rental,
+            'rental' => $rental,
         ]);
     }
 }

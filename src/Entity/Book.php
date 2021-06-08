@@ -20,6 +20,8 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Book
 {
+    const DEFAULT_PHOTO = 'https://mybookee.com/images/nocover.jpg';
+
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
@@ -219,7 +221,11 @@ class Book
 
     public function getPhoto(): ?string
     {
-        return $this->photo;
+        if ($this->photo)
+        {
+            return $this->photo;
+        }
+        return self::DEFAULT_PHOTO;
     }
 
     public function setPhoto(?string $photo): self

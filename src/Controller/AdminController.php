@@ -30,7 +30,7 @@ class AdminController extends AbstractController
      */
     public function user(): Response
     {
-        // TODO
+        // TODO: users CRUD
         return $this->render('admin/users.html.twig', [
         ]);
     }
@@ -40,7 +40,7 @@ class AdminController extends AbstractController
      */
     public function books(): Response
     {
-        // TODO
+        // TODO: books CRUD
         return $this->render('admin/books.html.twig', [
         ]);
     }
@@ -50,6 +50,7 @@ class AdminController extends AbstractController
      */
     public function rentalsStatus(RentalRepository $rentalRepository): Response
     {
+        // sorting rentals into categories by status
         $ordered = $rentalRepository->findBy(['status'=>Rental::STATUS_ORDERED]);
         $waiting = $rentalRepository->findBy(['status'=>Rental::STATUS_WAITING]);
         $rented = $rentalRepository->findBy(['status'=>Rental::STATUS_RENTED]);
@@ -65,7 +66,7 @@ class AdminController extends AbstractController
      */
     public function users(Request $request, HttpClientInterface $client): Response
     {
-        //TODO
+        //TODO: get user by his barcode
         if (!$barcode = $request->query->get('barcode'))
         {
             return $this->render('admin/users.html.twig', [

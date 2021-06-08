@@ -19,4 +19,5 @@ class CardRepository extends ServiceEntityRepository
         parent::__construct($registry, Card::class);
     }
 
+    // TODO: get card by barcode
 }
