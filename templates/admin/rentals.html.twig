@@ -1,0 +1,70 @@
+{% extends 'admin/index.html.twig' %}
+
+{% block title %}Wypożyczenia{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('profile') }}
+{% endblock %}
+{% block content %}
+    <div class="tab-content" id="nav-tabContent">
+        <h2>Oczekujące</h2>
+        <div class="container-horizontal">
+            {% for rental in waiting %}
+                <div class="book-vertical">
+                    <img class="book-img" src="{{ asset(rental.book.photo) }}" alt="">
+                    <div class="book-data">
+                        <h4>{{ rental.id }}</h4>
+                        <h5>{{ rental.reader.id }}
+                            . {{ rental.reader.userDetails.name }} {{ rental.reader.userDetails.surname }}</h5>
+                        <h5>Status: {{ rental.status }} <span class="js-changed" id="{{ rental.id }}"></span></h5>
+                        <h5><a href="#">{{ rental.book.title }}</a></h5>
+                        <h4>Data zamówienia: {{ rental.orderDate.format('d.m.Y') | default('01.01.01') }}</h4>
+                        <button class="btn btn-secondary js-status-btn" id="{{ rental.id }}"
+                                >Zmień status
+                        </button>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        <h2>Zamówione</h2>
+        <div class="container-horizontal">
+            {% for rental in ordered %}
+                <div class="book-vertical">
+                    <img class="book-img" src="{{ asset(rental.book.photo) }}" alt="">
+                    <div class="book-data">
+                        <h4>{{ rental.id }}</h4>
+                        <h5>{{ rental.reader.id }}
+                            . {{ rental.reader.userDetails.name }} {{ rental.reader.userDetails.surname }}</h5>
+                        <h5>Status: {{ rental.status }}</h5>
+                        <h5><a href="#">{{ rental.book.title }}</a></h5>
+                        <h4>Data zamówienia: {{ rental.orderDate.format('d.m.Y') | default('01.01.01') }}</h4>
+                        <button class="btn btn-secondary js-status-btn"
+                                >Zmień status
+                        </button>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        <h2>Wypożyczone</h2>
+        <div class="container-horizontal">
+            {% for rental in rented %}
+                <div class="book-vertical">
+                    <img class="book-img" src="{{ asset(rental.book.photo) }}" alt="">
+                    <div class="book-data">
+                        <h4>{{ rental.id }}</h4>
+                        <h5>{{ rental.reader.id }}
+                            . {{ rental.reader.userDetails.name }} {{ rental.reader.userDetails.surname }}</h5>
+                        <h5>Status: {{ rental.status }}</h5>
+                        <h5><a href="#">{{ rental.book.title }}</a></h5>
+                        <h4>Data wypożyczenia: {{ rental.rentDate.format('d.m.Y') | default('01.01.01') }}</h4>
+                        <h4>Oczekiwany termin
+                            zwrotu: {{ rental.expReturnDate.format('d.m.Y') | default('01.01.01') }}</h4>
+                        <button class="btn btn-secondary js-status-btn"
+                                >Zmień status
+                        </button>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

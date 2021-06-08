@@ -1,0 +1,83 @@
+@import "~bootstrap";
+
+body {
+    background-color: white;
+    background-image: url("../../public/images/bg_log.png");
+    background-size: cover;
+    min-width: 100vw;
+    min-height: 100vh;
+}
+
+.content-bar {
+    width: 100%;
+    height: fit-content;
+
+    display: flex;
+    flex-direction: column;
+
+    background-color: rgba(248, 249, 250, 0.8);
+    align-items: center;
+
+    padding: 1em;
+    box-shadow: 5px 5px 5px black;
+}
+
+
+.book-horizontal {
+    height: fit-content;
+
+    margin: 1em 4em;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.book-vertical {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin: 0 2em;
+}
+
+.container-horizontal {
+    width: 100%;
+    height: fit-content;
+    justify-content: space-evenly;
+
+    padding: 1em 1em 2em;
+
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.book-img {
+    height: 15em;
+    margin: 1em;
+}
+
+@media (max-device-width: 800px) {
+    .login-page-container {
+        margin: 5% 0 0;
+    }
+
+    input[type="checkbox"] {
+        zoom: 2;
+    }
+
+    * {
+        font-size: 30px;
+    }
+
+    .container-vertical {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .container-horizontal {
+        display: flex;
+        flex-direction: column;
+    }
+
+}

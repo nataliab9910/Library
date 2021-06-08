@@ -1,0 +1,30 @@
+{% extends 'profile/index.html.twig' %}
+
+{% block title %}Historia wypożyczeń{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('profile') }}
+{% endblock %}
+
+{% block content %}
+    <div class="tab-content" id="nav-tabContent">
+        <h2>Moja historia zwrotów</h2>
+        <div class="container-horizontal">
+            {% for rental in rentals %}
+                <div class="book-vertical">
+                    <img class="book-img" src="{{ asset(rental.book.photo) }}" alt="">
+                    <div class="book-data">
+                        <h5><a href="#">{{ rental.book.title }}</a></h5>
+                        <h6>
+                            {% for author in rental.book.authors %}
+                                {{ author.name }} {{ author.surname}},
+                            {% endfor %}
+                        </h6>
+                        <h4>Data wypożyczenia: {{ rental.rentDate.format('d.m.Y') }}</h4>
+                        <h4>Data zwrotu: {{ rental.returnDate.format('d.m.Y') }}</h4>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

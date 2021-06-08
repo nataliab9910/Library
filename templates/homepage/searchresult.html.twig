@@ -1,0 +1,36 @@
+{% extends 'homepage/index.html.twig' %}
+
+{% block title %}Wyniki wyszukiwania{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block content %}
+<div class="content-bar">
+    <h1>Wyniki wyszukiwania</h1>
+    <div class="container-horizontal">
+        {% for book in books %}
+            <div class="book-vertical">
+                <img class="book-img" src="{{ asset(book.photo) }}" alt="">
+                <div class="book-data">
+                    <h5><a href="#">{{ book.title }}</a></h5>
+                    <h6> Autorzy:
+                        {% for author in book.authors %}
+                            {{ author.name }} {{ author.surname }},
+                        {% endfor %}
+                    </h6>
+                    <h6>Wydawnictwo: {% if book.publisher %}{{ book.publisher.name }}{% endif %}</h6>
+                    <h6>Gatunek:
+                        {% for genre in book.genres %}
+                            {{ genre.name }},
+                        {% endfor %}
+                    </h6>
+                    <button class="btn btn-secondary"
+                            onclick="window.location.href='{{ path('order_book', {id: book.id}) }}'">Zamów
+                    </button>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

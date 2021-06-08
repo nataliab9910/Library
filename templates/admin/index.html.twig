@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Admin Pannel{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('profile') }}
+{% endblock %}
+
+{% block body %}
+    <div class="profile-page">
+        <nav>
+            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                <button class="nav-link  {{ app.request.get('_route') == 'userdata' ? 'active' }}" id="nav-home-tab"
+                        data-bs-toggle="tab" data-bs-target="#nav-home" onclick="location.href='{{ path('admin_users') }}'"
+                        type="button"
+                        role="tab" aria-controls="nav-home" aria-selected="true">Użytkownicy
+                </button>
+                <button class="nav-link {{ app.request.get('_route') == 'rentals' ? 'active' }}" id="nav-profile-tab"
+                        data-bs-toggle="tab" data-bs-target="#nav-profile"
+                        onclick="location.href='{{ path('admin_books') }}'" type="button" role="tab"
+                        aria-controls="nav-profile" aria-selected="false">Książki
+                </button>
+                <button class="nav-link  {{ app.request.get('_route') == 'orders' ? 'active' }}" id="nav-contact-tab"
+                        data-bs-toggle="tab" data-bs-target="#nav-contact"
+                        onclick="location.href='{{ path('admin_rentals') }}'"
+                        type="button" role="tab" aria-controls="nav-contact" aria-selected="false">Wypożyczenia
+                </button>
+            </div>
+        </nav>
+        <div class="content-bar">
+            {% block content %}
+                <div class="tab-content" id="nav-tabContent">
+                    Wybierz odpowiednią zakładkę
+                </div>
+            {% endblock %}
+        </div>
+    </div>
+{% endblock %}

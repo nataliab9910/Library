@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Logowanie{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('security') }}
+{% endblock %}
+
+{% block body %}
+    <div class="login-page-container">
+        <div class="login-container">
+            {% block content %}
+
+                <h1>Logowanie</h1>
+
+                {% if error %}
+                    <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                {% endif %}
+
+                {% if app.user %}
+                    <h5>
+                        Jesteś zalogowany jako {{ app.user.username }}.<br>
+                        Aby się wylogować kliknij <a href="{{ path('logout') }}">tutaj</a>.
+                    </h5>
+                {% endif %}
+
+                <form method="post" {% if app.user %} class="disabled" {% endif %}>
+                    <label class="form-lbl" for="inputEmail">Email</label>
+                    <input type="email" value="{{ last_username }}" name="email" id="inputEmail"
+                           class="form-control input-bar"
+                           autocomplete="email" required autofocus>
+                    <label class="form-lbl" for="inputPassword">Password</label>
+                    <input type="password" name="password" id="inputPassword" class="form-control input-bar"
+                           autocomplete="current-password"
+                           required>
+
+                    <input type="hidden" name="_csrf_token"
+                           value="{{ csrf_token('authenticate') }}"
+                    >
+
+                    <div class="checkbox mb-3">
+                        <label>
+                            <input type="checkbox" name="_remember_me"> Zapamiętaj mnie
+                        </label>
+                    </div>
+
+                    <button class="btn btn-secondary submit-btn" type="submit" {% if app.user %} disabled {% endif %}>
+                        Zaloguj
+                    </button>
+                </form>
+
+                <div class="text-small" {% if app.user %} hidden {% endif %}>
+                    Nie masz konta?
+                    <a href="{{ path('register') }}">Zarejestruj się!</a>
+                </div>
+
+            {% endblock %}
+        </div>
+    </div>
+{% endblock %}

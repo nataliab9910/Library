@@ -1,0 +1,73 @@
+{% extends 'base.html.twig' %}
+{% form_theme registrationForm _self %}
+
+{% block title %}Rejestracja{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('security') }}
+{% endblock %}
+
+{% block form_row %}
+    {%- set widget_attr = {} -%}
+    {%- if help is not empty -%}
+        {%- set widget_attr = {attr: {'aria-describedby': id ~"_help"}} -%}
+    {%- endif -%}
+    {{- form_label(form, null, {
+        label_attr: {
+            class: 'form-lbl'
+        }
+    }) -}}
+    {{- form_errors(form) -}}
+    {{- form_widget(form, widget_attr) -}}
+    {{- form_help(form) -}}
+{% endblock %}
+
+{% block body %}
+    <div class="login-page-container">
+        <div class="login-container register">
+            {% block content %}
+                <h1>Zarejestruj się</h1>
+
+                {% for flashError in app.flashes('verify_email_error') %}
+                    <div class="alert alert-danger" role="alert">{{ flashError }}</div>
+                {% endfor %}
+
+                {% if app.user %}
+                    <h5>
+                        Jesteś zalogowany jako {{ app.user.username }}.<br>
+                        Aby się wylogować kliknij <a href="{{ path('logout') }}">tutaj</a>.
+                    </h5>
+                {% endif %}
+
+                {{ form_start(registrationForm, {
+                    attr: { class: 'form-signin'}
+                }) }}
+
+                {{ form_row(registrationForm.email) }}
+                {{ form_row(registrationForm.password) }}
+
+                <div>
+                    <label class="form-lbl" for="name">Imię</label>
+                    <input class="input-not-round" type="text" id="name" name="name"/>
+                </div>
+                <div>
+                    <label class="form-lbl" for="surname">Nazwisko</label>
+                    <input class="input-not-round" type="text" id="surname" name="surname"/>
+                </div>
+
+                <div {% if app.user %} class="disabled" {% endif %}>
+                    {{ form_row(registrationForm.submit, {'label': 'Zarejestruj się'}) }}
+                </div>
+
+                {{ form_end(registrationForm) }}
+
+                <div class="text-small" {% if app.user %} hidden {% endif %}>
+                    Masz już konto?
+                    <a href="{{ path('login') }}">Zaloguj się!</a>
+                </div>
+
+            {% endblock %}
+        </div>
+    </div>
+{% endblock %}

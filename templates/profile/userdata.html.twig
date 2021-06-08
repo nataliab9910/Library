@@ -1,0 +1,47 @@
+{% extends 'profile/index.html.twig' %}
+
+{% block title %}Moje dane{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('profile') }}
+{% endblock %}
+
+{% block content %}
+    <div class="tab-content" id="nav-tabContent">
+        <h2>Moje dane</h2>
+        {% if (app.user.status == 'blocked' or app.user.status == 'disabled') %}
+            <h3>Aktywuj konto!</h3>
+        {% endif %}
+        <div class="container-vertical">
+            <img class="user-img" src="{{ asset(app.user.userDetails.photo) }}" alt="">
+            <div class="personal-data">
+                <div class="data-line">
+                    <i class="fas fa-user"></i> {{  app.user.userDetails.name }} {{ app.user.userDetails.surname }}
+                </div>
+                <div class="data-line">
+                    <i class="fas fa-home"></i> {{  app.user.userDetails.address }}
+                </div>
+                <div class="data-line">
+                    <i class="fas fa-phone"></i> {{  app.user.userDetails.phone }}
+                </div>
+                <div class="data-line">
+                    <i class="fas fa-envelope"></i> {{  app.user.email }}
+                </div>
+                <div class="data-line">
+                    <button class="btn btn-secondary">Edytuj dane</button>
+                    <button class="btn btn-secondary">Edytuj zdjęcie</button>
+                </div>
+            </div>
+            <div class="barcode-tab">
+                <h3>Twój kod:</h3>
+                {% if app.user.card %}
+                <img class="barcode"
+                     src="https://barcode.tec-it.com/barcode.ashx?data={{ app.user.card.barcode }}&code=Code128&translate-esc=on">
+                {% else %}
+                Zgłoś się do biblioteki aby aktywować swoje konto<br>i uzyskać kartę biblioteczną.
+                {% endif %}
+            </div>
+
+        </div>
+    </div>
+{% endblock %}
