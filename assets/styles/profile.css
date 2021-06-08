@@ -70,5 +70,9 @@ button.active {
         height: 10em;
         width: 10em;
     }
+
+    .container-vertical {
+        flex-direction: column;
+    }
 }
 

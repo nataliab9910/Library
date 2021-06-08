@@ -60,31 +60,4 @@ class AdminController extends AbstractController
             'rented' => $rented,
         ]);
     }
-
-    /**
-     * @Route("/admin/pannel/users", name="admin_users")
-     */
-    public function users(Request $request, HttpClientInterface $client): Response
-    {
-        //TODO: get user by his barcode
-        if (!$barcode = $request->query->get('barcode'))
-        {
-            return $this->render('admin/users.html.twig', [
-                'controller_name' => 'AdminController',
-            ]);
-        }
-
-        $url = 'https://localhost:8000/api/cards?page=1&barcode=' . $barcode;
-        //dd($request);
-        $response = $client->request(
-            'GET',
-            $url
-        );
-
-        dd($response);
-
-        return $this->render('admin/users.html.twig', [
-            'controller_name' => 'AdminController',
-        ]);
-    }
 }
