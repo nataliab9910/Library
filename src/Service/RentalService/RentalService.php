@@ -49,9 +49,12 @@ class RentalService implements RentalServiceInterface
         switch ($status) {
             case Rental::STATUS_RENTED:
                 $newStatus = Rental::STATUS_RETURNED;
+                $rental->setReturnDate(new \DateTime());
                 break;
             case Rental::STATUS_WAITING:
                 $newStatus = Rental::STATUS_RENTED;
+                $rental->setRentDate(new \DateTime());
+                $rental->setExpReturnDate((new \DateTime())->add(new \DateInterval('P30D')));
                 break;
             case Rental::STATUS_ORDERED:
                 $newStatus = Rental::STATUS_WAITING;
