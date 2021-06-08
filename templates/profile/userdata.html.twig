@@ -9,6 +9,9 @@
 {% block content %}
     <div class="tab-content" id="nav-tabContent">
         <h2>Moje dane</h2>
+        {% if (app.user.status == 'blocked' or app.user.status == 'disabled') %}
+            <h3>Aktywuj konto!</h3>
+        {% endif %}
         <div class="container-vertical">
             <img class="user-img" src="{{ asset(app.user.userDetails.photo) }}" alt="">
             <div class="personal-data">

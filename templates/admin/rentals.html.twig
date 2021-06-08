@@ -5,7 +5,6 @@
     {{ parent() }}
     {{ encore_entry_link_tags('profile') }}
 {% endblock %}
-
 {% block content %}
     <div class="tab-content" id="nav-tabContent">
         <h2>Oczekujące</h2>
@@ -20,7 +19,7 @@
                         <h5><a href="#">{{ rental.book.title }}</a></h5>
                         <h4>Data zamówienia: {{ rental.orderDate.format('d.m.Y') | default('01.01.01') }}</h4>
                         <button class="btn btn-secondary js-status-btn" id="{{ rental.id }}"
-                                onclick="">Zmień status
+                                >Zmień status
                         </button>
                     </div>
                 </div>
@@ -38,7 +37,7 @@
                         <h5><a href="#">{{ rental.book.title }}</a></h5>
                         <h4>Data zamówienia: {{ rental.orderDate.format('d.m.Y') | default('01.01.01') }}</h4>
                         <button class="btn btn-secondary js-status-btn"
-                                onclick="">Zmień status
+                                >Zmień status
                         </button>
                     </div>
                 </div>
@@ -58,15 +57,11 @@
                         <h4>Oczekiwany termin
                             zwrotu: {{ rental.expReturnDate.format('d.m.Y') | default('01.01.01') }}</h4>
                         <button class="btn btn-secondary js-status-btn"
-                                onclick="">Zmień status
+                                >Zmień status
                         </button>
                     </div>
                 </div>
             {% endfor %}
         </div>
     </div>
-{% endblock %}
-{% block javascripts %}
-    {{ parent() }}
-    <script src="{{ asset('test.js') }}"></script>
 {% endblock %}

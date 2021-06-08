@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Rental;
+use App\Entity\User;
 use App\Service\RentalService\RentalServiceInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
@@ -28,7 +29,6 @@ class ProfileController extends AbstractController
     public function userdata(): Response
     {
         return $this->render('profile/userdata.html.twig', [
-            'controller_name' => 'ProfileController',
         ]);
     }
 
@@ -61,6 +61,9 @@ class ProfileController extends AbstractController
      */
     public function orderBook($id, RentalServiceInterface $service): Response
     {
+        if (in_array($this->getUser()->getStatus(), [User::STATUS_BLOCKED, User::STTAUS_DISABLED])){
+            return $this->redirectToRoute('userdata');
+        }
         $service->create($this->getUser(), $id);
         return $this->redirectToRoute('orders');
     }

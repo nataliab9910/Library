@@ -21,6 +21,8 @@ class RentalController extends AbstractController
     {
         $rental = $service->changeStatus($id);
 
-        return $this->json(['rental'=>$rental]);
+        return $this->json([
+            'rental'=>$rental,
+        ]);
     }
 }

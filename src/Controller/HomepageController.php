@@ -25,7 +25,6 @@ class HomepageController extends AbstractController
      */
     public function search(BookRepository $repository, Request $request): Response
     {
-        // TODO: service
         $search = $request->query->get('search');
         $books = $repository->findAllWithSearch($search);
 
