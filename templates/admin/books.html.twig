@@ -9,6 +9,19 @@
 {% block content %}
     <div class="tab-content" id="nav-tabContent">
         <h2>Książki</h2>
-
+        <form class="search-group" action>
+            <div class="form-outline">
+                <label class="form-lbl" for="title">Tytuł</label>
+                <input type="text" name="title" id="title"
+                       class="form-control input-bar" required>
+                <label class="form-lbl" for="isbn">ISBN</label>
+                <input type="text" name="isbn" id="isbn" class="form-control input-bar">
+                <label class="form-lbl" for="pages">Strony</label>
+                <input type="text" name="pages" id="pages" class="form-control input-bar">
+            </div>
+            <button id="search-button" type="submit" class="btn btn-secondary submit-btn" formaction="/book/add">
+                Dodaj
+            </button>
+        </form>
     </div>
 {% endblock %}

@@ -34,4 +34,17 @@ class BookRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
+
+    public function create(Book $book)
+    {
+        $this->getEntityManager()->persist($book);
+        $this->getEntityManager()->flush();
+        return $book;
+    }
+
+    public function delete(Book $book)
+    {
+        $this->getEntityManager()->remove($book);
+        $this->getEntityManager()->flush();
+    }
 }
